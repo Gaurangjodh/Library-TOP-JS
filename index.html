@@ -18,10 +18,38 @@
             </tr>
         </table>
     </div>
-    <div class="inputContainer">
-        
-    </div>
-    
+        <!-- A modal dialog containing a form -->
+    <dialog id="favDialog">
+        <form>
+        <p>
+            <label for="title">Title of book</label>
+            <input id="title" type="text">
+        </p>
+        <p>
+            <label for="author">Author of book</label>
+            <input id="author" type="text">
+        </p>
+        <p>
+            <label for="pages">No. of pages</label>
+            <input id="pages" type="text">
+        </p>
+        <p>
+            <label for="read">Have you read it yet?</label>
+            <input id="read" type="text">
+        </p>
+        <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+        </form>
+    </dialog>
+    <p>
+        <button id="showDialog">Add a book</button>
+    </p>
+    <p>
+        <button id="deleteBook">Delete a book</button>
+    </p>
+    <p class="output"></p>
 
     <script src="script.js"></script>
 </body>
