@@ -7,17 +7,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="tableContainer">
-        <table id="bookTable">
-            <tr>
-                <th>Sr.no</th>
-                <th>Book title</th>
-                <th>Author</th>
-                <th>Pages</th>
-                <th>Read status</th>
-            </tr>
-        </table>
+    <div class="header">
+        <div class="logo">Library<img src="logo.svg" alt="logo">.com</div>
+        <button id="showDialog">Add a book</button>
     </div>
+    <div class="card-holder">
+        <div class="card">
+            <div class="image">
+                <img class="book-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/600px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg" alt="Book">
+                <img src="heart.svg" alt="heart" class="heart">
+            </div>
+            <div class="text-box">
+                <h3 class="book-title">Harry Pott</h3>
+                <p class="readStatus">Read</p>
+                <p class="noPages">5 Pages</p>
+                <h4>Author name</h4>
+                </div>
+            <div class="button-box">
+                <button class="toggle">Toggle Read status</button>
+                <button class="delete">Delete book</button>
+            </div>
+        </div>
+    </div>
+
         <!-- A modal dialog containing a form -->
     <dialog id="favDialog">
         <form>
@@ -30,12 +42,19 @@
             <input id="author" type="text">
         </p>
         <p>
-            <label for="pages">No. of pages</label>
-            <input id="pages" type="text">
+            <label for="imageurl">Book image url</label>
+            <input id="imageurl" type="text">
         </p>
         <p>
-            <label for="read">Have you read it yet?</label>
-            <input id="read" type="text">
+            <label for="pages">No. of pages</label>
+            <input id="pages" type="number">
+        </p>
+        <p>
+            <label for="reads">Have you read it yet?</label>
+            <select id="reads">
+                <option value="Read">Read</option>
+                <option value="Not Read">Not read</option>
+            </select>
         </p>
         <div>
             <button value="cancel" formmethod="dialog">Cancel</button>
@@ -43,13 +62,6 @@
         </div>
         </form>
     </dialog>
-    <p>
-        <button id="showDialog">Add a book</button>
-    </p>
-    <p>
-        <button id="deleteBook">Delete a book</button>
-    </p>
-    <p class="output"></p>
 
     <script src="script.js"></script>
 </body>

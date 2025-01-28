@@ -1,7 +1,102 @@
-table,tr,th,td{
-    border: 2px solid black;
-    padding: 5px 10px;
+.header{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    position: relative;
 }
-th{
-    background-color: antiquewhite;
+.logo{
+    font-size: 32px;
+    font-weight: 800;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+
+}
+.readStatus, .noPages{
+    display: inline;
+    padding: 2px 6px;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black !important;
+}
+.readStatus{
+    margin-right: 10px;
+}
+.logo img{
+    height: 50px;
+}
+.card-holder{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    padding: 50px;
+}
+.image .book-img{
+    height: 200px;
+    width: 230px;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.image{
+    position: relative;
+}
+.image .heart{
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 3px;
+    box-shadow: 0px 0px 3px black;
+    cursor: pointer;
+    height: 15px;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    height: 420px;
+    width: 250px;
+    /* border: 2px solid; */
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 0px 10px black;
+}
+.text-box{
+    width: inherit;
+    margin-bottom: 15px;
+}
+.text-box p{
+    font-size: 14px;
+    color: rgb(69, 69, 69);
+}
+.text-box h4{
+    color: rgb(208, 45, 116);
+}
+.button-box{
+    display: flex;
+    gap: 10px;
+}
+.button-box button{
+    padding: 5px 10px;
+    border: none;
+    background-color: rgb(7, 110, 184);
+    color: white;
+    font-weight: 600;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px black;
+    cursor: pointer;
+}
+.button-box .delete{
+    background-color: red;
+}
+#showDialog{
+    padding: 10px 15px;
+    background-color: cadetblue;
+    color: white;
+    font-weight: 800;
+    border-radius: 5px;
+    border: 1px solid black;
+    position: absolute;
+    right: 60px;
+    top: 10px;
 }

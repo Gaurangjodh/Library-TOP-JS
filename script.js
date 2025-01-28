@@ -1,79 +1,130 @@
 const myLibrary = [];
 
-function Book(title, author, pages, readStatus){
+function Book(title, author, pages, readStatus, imageurl){
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.readStatus = readStatus;
+    this.imageurl = imageurl;
 }
-
-function addBookToLibrary(title, author, pages, readStatus){
-    const newBook = new Book(title, author, pages, readStatus);
+// Book.prototype.toggleReadStatus = function(){
+//   this.readStatus = "read";
+// }
+function addBookToLibrary(title, author, pages, readStatus, imageurl){
+    const newBook = new Book(title, author, pages, readStatus, imageurl);
     myLibrary.push(newBook);
+    displayBooks(title, author, pages, readStatus), imageurl;
+}
+const readS = document.createElement('p');
+function displayBooks(title, author, pages, readStatus, imageurl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/600px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg"){
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const imageBox = document.createElement('div');
+  imageBox.classList.add('image');
+
+  const bookimg = document.createElement('img');
+  bookimg.classList.add('book-img');
+  bookimg.setAttribute('src', imageurl);
+
+  const heartImg = document.createElement('img');
+  heartImg.classList.add('heart');
+  heartImg.setAttribute('src', 'heart.svg');
+
+  imageBox.appendChild(bookimg);
+  imageBox.appendChild(heartImg);
+
+  const textBox = document.createElement('div');
+  textBox.classList.add('text-box');
+
+  const bookTitle = document.createElement('h3');
+  bookTitle.classList.add('book-title');
+  bookTitle.textContent = title;
+
+  
+  readS.classList.add('readStatus');
+  readS.textContent = readStatus;
+
+  const noP = document.createElement('p');
+  noP.classList.add('noPages');
+  noP.textContent = `${pages} pages`;
+
+  const authorN = document.createElement('h4');
+  authorN.textContent = author;
+
+  textBox.appendChild(bookTitle);
+  textBox.appendChild(readS);
+  textBox.appendChild(noP);
+  textBox.appendChild(authorN);
+
+  const buttonBox = document.createElement('div');
+  buttonBox.classList.add('button-box');
+
+  const toggle = document.createElement('button');
+  toggle.classList.add('toggle');
+  toggle.textContent = "Toggle Read status";
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.classList.add('delete');
+  deleteBtn.textContent = "Delete";
+
+  buttonBox.appendChild(toggle);
+  buttonBox.appendChild(deleteBtn);
+
+  card.appendChild(imageBox);
+  card.appendChild(textBox);
+  card.appendChild(buttonBox);
+
+  document.querySelector(".card-holder").appendChild(card);
 }
 
-function displayBooks(){
-  for (let index = 0; index < myLibrary.length; index++) {
-    const book = myLibrary[index];
-    let row = table.insertRow(index+1);
-        let cell1 = row.insertCell(0);
-        let cell2 = row.insertCell(1);
-        let cell3 = row.insertCell(2);
-        let cell4 = row.insertCell(3);
-        let cell5 = row.insertCell(4);
-        
-        cell1.innerText = `${index+1}`;
-        cell2.innerText = `${book.title}`;
-        cell3.innerText = `${book.author}`;
-        cell4.innerText = `${book.pages}`;
-        cell5.innerText = `${book.readStatus}`;
-      }
+function addButton(){
+  const readButton = document.createElement('button');
+  readButton.classList.add('readBtn');
+  readButton.innerHTML = 'Toggle read';
+  return readButton;
 }
 
-function removePreviousBooks(){
-  const totalRows = table.rows.length;
-  if(totalRows>1){
-    const count = 1;
-    for (let index = 0; index < totalRows-1; index++) {
-      table.deleteRow(count);
-    }
-  }
-  return;
-}
+// function removePreviousBooks(){
+//   const totalRows = table.rows.length;
+//   if(totalRows>1){
+//     const count = 1;
+//     for (let index = 0; index < totalRows-1; index++) {
+//       table.deleteRow(count);
+//     }
+//   }
+//   return;
+// }
 
-function checkInputs(){
-  if(!titleOp.value || !authorOp.value || !pagesOp.value || !readOp.value){
-    return false;
-  }
-  return true;
-}
+// function checkInputs(){
+//   if(!titleOp.value || !authorOp.value || !pagesOp.value || !text){
+//     return false;
+//   }
+//   return true;
+// }
 
 // addBookToLibrary("Lil nigga", "Kanye", 3, "read");
 // addBookToLibrary("Lil ", "ye", 30, "not read");
 // addBookToLibrary("igga", "west", 123, "read");
 // displayBooks();
 
-const table = document.querySelector("#bookTable");
 
+const toggleRead = document.querySelector(".readBtn");
 const showButton = document.getElementById("showDialog");
 const favDialog = document.getElementById("favDialog");
 const confirmBtn = favDialog.querySelector("#confirmBtn");
 const titleOp = document.querySelector("#title");
 const authorOp = document.querySelector("#author");
 const pagesOp = document.querySelector("#pages");
-const readOp = document.querySelector("#read");
-const deleteBook = document.querySelector("#deleteBook");
-const output = document.querySelector(".output");
-
-deleteBook.addEventListener("click", () => {
-  if(table.rows.length > 1){
-    table.deleteRow(-1);
-    output.textContent = ``
-  }
-  else{
-    output.textContent = `Nothing to delete here.`
-  }
-})
+const imageurl = document.querySelector("#imageurl");
+const toggleBtn = document.querySelector(".toggle");
+const delBtn = document.querySelector(".delete");
+const selectElement = document.getElementById("reads");
+let selectedValue = selectElement.value;
+selectElement.addEventListener("change", function() {
+    selectedValue = selectElement.value;
+    console.log(selectedValue);  // Logs the selected option: "Read" or "NotRead"
+});
 
 // "Show the dialog" button opens the <dialog> modally
 showButton.addEventListener("click", () => {
@@ -90,12 +141,11 @@ favDialog.addEventListener("close", (e) => {
 confirmBtn.addEventListener("click", (event) => {
   event.preventDefault(); // We don't want to submit this fake form
   //addBookToLibrary(titleOp.textContent) // Have to send the select box value here.
-  if(checkInputs()){
+ 
     //displayBooks();
-    addBookToLibrary(titleOp.value, authorOp.value, pagesOp.value, readOp.value);
-    removePreviousBooks();
-    displayBooks();
-    output.textContent = ``;
-  }
+    console.log(selectedValue);
+  addBookToLibrary(titleOp.value, authorOp.value, pagesOp.value, selectedValue, imageurl);
+    // removePreviousBooks();
+  
   favDialog.close();
 });
