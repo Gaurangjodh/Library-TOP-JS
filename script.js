@@ -20,6 +20,9 @@ function addBookToLibrary(title, author, pages, read, imageurl){
 }
 
 function displayBooks(){
+  if(myLibrary.length === 0){
+    cards.innerHTML = '';
+  }
   let index = 0;
   let books = '';
   myLibrary.forEach(book => {
@@ -35,7 +38,7 @@ function displayBooks(){
                 <h4>${book.author}</h4>
                 </div>
             <div class="button-box">
-                <button class="toggle" id="${index}">Toggle Read status</button>
+                <button class="toggle" onclick="toggleRead(${index})">Toggle Read status</button>
                 <button class="delete" onclick='deleteBook(${index})'>Delete book</button>
             </div>
         </div>`;
@@ -45,11 +48,19 @@ function displayBooks(){
   });
 }
 
+function toggleRead(index){
+  if(myLibrary[index].read == "Read"){
+    myLibrary[index].read = "Not Read";
+  }
+  else{
+    myLibrary[index].read = "Read";
+  }
+  displayBooks();
+}
 function deleteBook(index){
   myLibrary.splice(index,1);
   displayBooks();
 }
-
 
 const deleteCard = document.querySelector(".delete");
 
