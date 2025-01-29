@@ -14,13 +14,46 @@ function Book(title, author, pages, read, imageurl){
 }
 
 function addBookToLibrary(title, author, pages, read, imageurl){
-  console.log("entered addBTL()");
   const book = new Book(title, author, pages, read, imageurl);
 
   myLibrary.push(book);
 }
 
+function displayBooks(){
+  let index = 0;
+  let books = '';
+  myLibrary.forEach(book => {
+    books += `<div class="card">
+            <div class="image">
+                <img class="book-img" src="${book.imageurl}" alt="Book">
+                <img src="heart.svg" alt="heart" class="heart">
+            </div>
+            <div class="text-box">
+                <h3 class="book-title">${book.title}</h3>
+                <p class="readStatus">${book.read}</p>
+                <p class="noPages">${book.pages} pages</p>
+                <h4>${book.author}</h4>
+                </div>
+            <div class="button-box">
+                <button class="toggle" id="${index}">Toggle Read status</button>
+                <button class="delete" onclick='deleteBook(${index})'>Delete book</button>
+            </div>
+        </div>`;
 
+        cards.innerHTML = books;
+        index += 1;
+  });
+}
+
+function deleteBook(index){
+  myLibrary.splice(index,1);
+  displayBooks();
+}
+
+
+const deleteCard = document.querySelector(".delete");
+
+const cards = document.querySelector(".card-holder");
 const title = document.querySelector("#title");
 const author = document.querySelector("#author");
 const imageurl = document.querySelector("#imageurl");
@@ -43,5 +76,6 @@ confirmBtn.addEventListener("click", (event) => {
   console.log("entered confirmBtn");
   console.log(selectEl.value);
   addBookToLibrary(title.value, author.value, pages.value, selectEl.value, imageurl.value);
+  displayBooks();
   favDialog.close();
 });
