@@ -29,7 +29,7 @@ function displayBooks(){
     books += `<div class="card">
             <div class="image">
                 <img class="book-img" src="${book.imageurl}" alt="Book">
-                <img src="heart.svg" alt="heart" class="heart">
+               
             </div>
             <div class="text-box">
                 <h3 class="book-title">${book.title}</h3>
@@ -61,6 +61,10 @@ function deleteBook(index){
   myLibrary.splice(index,1);
   displayBooks();
 }
+
+// heart.addEventListener("click", () => {
+//   this.style.backgroundColor = 'pink';
+// })
 
 const deleteCard = document.querySelector(".delete");
 
